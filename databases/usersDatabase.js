@@ -2,7 +2,7 @@ const users = [
   {
     "id": "1c3d7f9a-0c2e-4a65-9df4-7f2b1c8e73a0",
     "name": "Andrea Reyes",
-    "correo": "andrea.reyes@correo.com",
+    "email": "andrea.reyes@correo.com",
     "password": "passwordDefault"
   },
   {
