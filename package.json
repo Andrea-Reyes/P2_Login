@@ -1,0 +1,17 @@
+{
+  "name": "p2_login",
+  "version": "1.0.0",
+  "description": "Sistema de autenticacion",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "type": "module",
+  "author": "Karen Reyes",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "uuid": "^11.1.0"
+  }
+}
