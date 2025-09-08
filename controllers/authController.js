@@ -28,8 +28,34 @@ function login(req, res) {
     });
 }
 
+//Metodo para loguear a un usuario
+function forgotPass(req, res) {
+    const { email } = req.body;
+
+    //Respuesta de estatus 400
+    if (!email) {
+        return res.status(400).json({ Error: "Por favor ingrese su coreo." });
+    } 
+
+    //Determinar si el usuario existe
+    const usuario = users.find(u => u.email === email);
+    if (!usuario) {
+        return res.status(404).json({ Error: "El correo ingresado no está registrado o es incorrecto." });
+    }
+
+    //Respuesta de estatus 200
+    const tokenData = tokensController.generarToken(usuario.email);
+    return res.status(200).json({ 
+        Mensaje: `${usuario.name}, se ha generado un token para actualizar tu contraseña.`,
+        URL: tokenData.URL,
+        Token: tokenData.Token,
+        Expira: tokenData.Expira
+    });
+}
+
 //Exportar métodos
 export {
     getAll,
-    login
+    login,
+    forgotPass
 };
