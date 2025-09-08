@@ -21,7 +21,28 @@ function generarToken(usuario){
     };
 }
 
+//Metodo para actualizar la contraseña y estatus del token
+function update(tokenParam, newPassword) {
+    //Determinar que el token exista y esté activo
+    const token = tokens.find(t => t.token === tokenParam && t.status === "Active");
+    if (!token) {
+        return null;
+    }
+
+    const usuario = users.find(u => u.email === token.usuario);
+    if (!usuario) {
+        return null;
+    }
+
+    //Actualizar contraseña y estado de token
+    usuario.password = newPassword;
+    token.status = "Used";
+
+    return usuario;
+}
+
 //Exportar métodos
 export {
-    generarToken
+    generarToken,
+    update
 };
