@@ -53,9 +53,33 @@ function forgotPass(req, res) {
     });
 }
 
+//Método para actualizar la contraseña
+function newPass(req, res){
+    const { password } = req.body;
+    const tokenParam = req.query.token;
+
+    //Respuesta de estatus 400
+    if (!password) {
+        return res.status(400).json({ Error: "Por favor ingrese su contraseña." });
+    } 
+
+    //Respuesta de estatus 404
+    const nuevaContrasena = tokensController.update(tokenParam, password);
+    if (!nuevaContrasena) {
+        return res.status(404).json({ Error: "El token ingresado es inconrrecto o ya ha expirado." });
+    }
+
+    //Respuesta de estatus 200
+    const correo = tokens.find(t => t.token === tokenParam);
+    return res.status(200).json({ 
+        Mensaje: `¡La contraseña asociada al correo: ${correo.usuario}, ha sido actualizada con exito!`
+    });
+}
+
 //Exportar métodos
 export {
     getAll,
     login,
-    forgotPass
+    forgotPass,
+    newPass
 };
